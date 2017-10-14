@@ -1,10 +1,11 @@
 CC= clang++
-FLAGS=-Wall -Wextra -std=c++1z -Werror
+FLAGS=-Wall -Wextra -std=c++1z
 FRWK=-framework sfml-graphics -framework sfml-system -framework sfml-window
 NAME_BIN= triangle
 
 SRC= main.cpp \
-	 WindowManager.cpp
+	 WindowManager.cpp \
+	 ObjectManager.cpp
 
 .PHONY: clean fclean re all
 .SILENT:

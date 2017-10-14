@@ -1,9 +1,7 @@
 #pragma once
 
-#ifndef OBJECTMANAGER
-# define OBJECTMANAGER
-
-# include "WindowManager.hpp"
+#include "WindowManager.hpp"
+#include <SFML/Graphics/CircleShape.hpp>
 
 class ObjectManager
 {
@@ -13,8 +11,9 @@ class ObjectManager
 		ObjectManager(const ObjectManager &obj) = delete;
 		ObjectManager &operator=(const ObjectManager &p) = delete;
 
+		void	Run();
+		void	Stop();
 	private:
-		
+		WindowManager	*m_windowManager;
+		std::atomic<bool>	m_running;
 };
-
-#endif
