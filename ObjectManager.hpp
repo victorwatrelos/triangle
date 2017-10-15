@@ -1,19 +1,28 @@
 #pragma once
 
-#include "WindowManager.hpp"
+#include "Entity.hpp"
+#include "ObjectManagerBase.hpp"
+#include "WindowManagerBase.hpp"
+#include "Types.hpp"
 #include <SFML/Graphics/CircleShape.hpp>
+#include <cmath>
+#include <mutex>
 
-class ObjectManager
+class WindowManager;
+
+class ObjectManager : public ObjectManagerBase
 {
 	public:
-		ObjectManager(WindowManager *windowManager);
+		ObjectManager();
 		virtual ~ObjectManager(void);
 		ObjectManager(const ObjectManager &obj) = delete;
 		ObjectManager &operator=(const ObjectManager &p) = delete;
 
-		void	Run();
+		void	Loop() override;
+		void	Init(WindowManagerBase *window) override;
 		void	Stop();
 	private:
-		WindowManager	*m_windowManager;
-		std::atomic<bool>	m_running;
+		WindowManagerBase				*m_windowManager;
+		std::atomic<bool>			m_running;
+		Entity						m_player;
 };

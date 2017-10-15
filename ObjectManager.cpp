@@ -1,9 +1,11 @@
 #include "ObjectManager.hpp"
 
-ObjectManager::ObjectManager(WindowManager *windowManager)
-	: m_windowManager(windowManager)
-	  , m_running(false)
+ObjectManager::ObjectManager() :
+	  m_running(false)
+	  , m_player("textures/triangle-green-double.png")
 {
+	m_player.CenterOrigin();
+	m_player.AddPosition({200.f, 200.f});
 }
 
 void	ObjectManager::Stop()
@@ -11,19 +13,21 @@ void	ObjectManager::Stop()
 	m_running = false;
 }
 
-void	ObjectManager::Run()
+void	ObjectManager::Init(WindowManagerBase *windowManager)
 {
-	sf::CircleShape *shape;
-
 	m_running = true;
-	shape = new sf::CircleShape(100);
-	shape->setFillColor(sf::Color(150, 50, 250));
-	shape->setOutlineThickness(10);
-	shape->setOutlineColor(sf::Color(250, 150, 100));
-	m_windowManager->AddObject(shape, true);
-	while (m_running)
-		sf::sleep(sf::milliseconds(100));
-	delete shape;
+	m_windowManager = windowManager;
+	auto ret = m_windowManager->AddObject(&m_player, true);
+	m_player.SetId(ret);
+}
+
+void	ObjectManager::Loop()
+{
+	static float rotation = 0.f;
+	m_player.rotate(rotation);
+	rotation += 0.1f;
+	rotation = std::fmod(rotation, 360.f);
+	sf::sleep(sf::milliseconds(50));
 }
 
 ObjectManager::~ObjectManager(void) {
