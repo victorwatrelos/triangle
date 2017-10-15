@@ -15,7 +15,10 @@ class Entity : public sf::Sprite
 		void	SetId(U16 id);
 		void	CenterOrigin();
 		void	AddPosition(const sf::Vector2f& pos);
+		void	Move(const sf::Time &time);
+		void	SetVelocity(const sf::Vector2f &velocity);
 	private:
 		sf::Texture		m_texture;
 		U16				m_id;
+		sf::Vector2f	m_velocity;
 };

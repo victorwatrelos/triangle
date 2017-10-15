@@ -52,11 +52,13 @@ void	WindowManager::Run()
 		sf::Event event;
 		while (m_window->pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			switch (event.type)
 			{
-				m_window->close();
-				continue ;
+				case sf::Event::Closed:
+					m_window->close();
+					continue ;
 			}
+
 		}
 		time = clock.restart();
 		m_objectManager->Loop(time);

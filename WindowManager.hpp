@@ -39,4 +39,5 @@ class WindowManager : public WindowManagerBase
 		ObjectManagerBase			*m_objectManager;
 
 		void						drawObject();
+		void						manageKePress(const sf::Event &event);
 };
