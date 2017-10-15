@@ -1,6 +1,6 @@
 CC= clang++
-FLAGS=-Wall -Wextra -std=c++1z
-FRWK=-framework sfml-graphics -framework sfml-system -framework sfml-window
+FLAGS=-Wall -Wextra -std=c++1z -I includes
+FRWK=-L lib -lsfml-graphics -lsfml-window -lsfml-system
 NAME_BIN= triangle
 
 SRC= main.cpp \
