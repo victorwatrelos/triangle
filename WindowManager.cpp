@@ -5,8 +5,8 @@ WindowManager::WindowManager(ObjectManagerBase *objectManager)
 	  , m_objectManager(objectManager)
 {
 	this->m_window = new sf::RenderWindow(sf::VideoMode(1600, 1200), "Triangle");
-	//this->m_window->setVerticalSyncEnabled(true);
-	this->m_window->setFramerateLimit(30);
+	this->m_window->setVerticalSyncEnabled(true);
+	//this->m_window->setFramerateLimit(30);
 	this->m_objectManager->Init(this);
 }
 
@@ -58,8 +58,8 @@ void	WindowManager::Run()
 				continue ;
 			}
 		}
-		//sf::sleep(sf::milliseconds(20));
-		m_objectManager->Loop();
+		time = clock.restart();
+		m_objectManager->Loop(time);
 		this->m_window->clear();
 		this->drawObject();
 		this->m_window->display();

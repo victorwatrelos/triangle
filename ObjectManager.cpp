@@ -21,13 +21,9 @@ void	ObjectManager::Init(WindowManagerBase *windowManager)
 	m_player.SetId(ret);
 }
 
-void	ObjectManager::Loop()
+void	ObjectManager::Loop(const sf::Time &time)
 {
-	static float rotation = 0.f;
-	m_player.rotate(rotation);
-	rotation += 0.1f;
-	rotation = std::fmod(rotation, 360.f);
-	sf::sleep(sf::milliseconds(50));
+	m_player.rotate(360.f * time.asSeconds());
 }
 
 ObjectManager::~ObjectManager(void) {

@@ -8,8 +8,6 @@
 #include <cmath>
 #include <mutex>
 
-class WindowManager;
-
 class ObjectManager : public ObjectManagerBase
 {
 	public:
@@ -18,7 +16,7 @@ class ObjectManager : public ObjectManagerBase
 		ObjectManager(const ObjectManager &obj) = delete;
 		ObjectManager &operator=(const ObjectManager &p) = delete;
 
-		void	Loop() override;
+		void	Loop(const sf::Time &time) override;
 		void	Init(WindowManagerBase *window) override;
 		void	Stop();
 	private:
