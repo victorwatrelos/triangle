@@ -49,6 +49,5 @@ void		Entity::SetVelocity(const sf::Vector2f &velocity)
 void		Entity::Move(const sf::Time &time)
 {
 	sf::Vector2f	currentPosition = this->getPosition();
-	std::cout << "Position: " << currentPosition.x << " " << currentPosition.y << std::endl;
 	this->setPosition((time.asSeconds() * m_velocity) + currentPosition);
 }

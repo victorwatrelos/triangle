@@ -1,5 +1,6 @@
 #pragma once
 
+#include "log.hpp"
 #include "ObjectManager.hpp"
 #include "WindowManagerBase.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>

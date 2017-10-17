@@ -57,6 +57,12 @@ void	WindowManager::Run()
 				case sf::Event::Closed:
 					m_window->close();
 					continue ;
+				break;
+				case sf::Event::JoystickMoved:
+					m_objectManager->JoystickMoved();	
+				break;
+				default:
+				break;
 			}
 
 		}

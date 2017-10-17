@@ -5,8 +5,13 @@
 #include "WindowManagerBase.hpp"
 #include "Types.hpp"
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/PrimitiveType.hpp>
 #include <cmath>
 #include <mutex>
+
+#define PLAYER_BASE_ROTATION -30.f
+#define DEG_TO_RADIAN(deg) (deg / M_PI * 180.f)
+#define RAD_TO_DEG(rad) (rad * 57.2958)
 
 class ObjectManager : public ObjectManagerBase
 {
@@ -18,9 +23,17 @@ class ObjectManager : public ObjectManagerBase
 
 		void	Loop(const sf::Time &time) override;
 		void	Init(WindowManagerBase *window) override;
+		void	JoystickMoved() override;
 		void	Stop();
 	private:
+		void	updateVelocity();//TODO optimized by only calling when update
+
 		WindowManagerBase				*m_windowManager;
 		std::atomic<bool>			m_running;
 		Entity						m_player;
+		float						m_playerSpeed;
+		float						m_playerRotation;
+		sf::Vertex 					line[2];
+		sf::VertexArray				triangle;
+
 };
