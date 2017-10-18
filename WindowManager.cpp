@@ -2,9 +2,10 @@
 
 WindowManager::WindowManager(ObjectManagerBase *objectManager)
 	: m_drawableChange(false)
+	  , m_view(sf::Vector2f(20.f, 20.f), sf::Vector2f(2000, 1500))
 	  , m_objectManager(objectManager)
 {
-	this->m_window = new sf::RenderWindow(sf::VideoMode(1600, 1200), "Triangle");
+	this->m_window = new sf::RenderWindow(sf::VideoMode(2900, 2175), "Triangle");
 	this->m_window->setVerticalSyncEnabled(true);
 	//this->m_window->setFramerateLimit(30);
 	this->m_objectManager->Init(this);
@@ -32,12 +33,23 @@ U16		WindowManager::AddObject(sf::Drawable *drawable, bool visible)
 
 void	WindowManager::drawObject()
 {
+	m_window->setView(m_view);
 	std::lock_guard<std::mutex> guard(this->mutex);
 	for (const auto &drawable : this->m_drawnObjects)
 	{
 		if (drawable.visible)
 			m_window->draw(*drawable.drawable);
 	}
+}
+
+void	WindowManager::SetViewCenter(sf::Vector2f center)
+{
+	m_view.setCenter(center);
+}
+
+void 	WindowManager::SetViewRotation(float rotation)
+{
+	m_view.setRotation(rotation);
 }
 
 void	WindowManager::Run()

@@ -24,6 +24,8 @@ class WindowManager : public WindowManagerBase
 
 		void				Run();
 		U16					AddObject(sf::Drawable *drawable, bool visible) override;
+		void				SetViewCenter(sf::Vector2f center) override;
+		void				SetViewRotation(float rotation) override;
 		std::mutex			&GetMutex();
 	private:
 		typedef struct		s_drawable
@@ -37,8 +39,8 @@ class WindowManager : public WindowManagerBase
 		std::mutex					mutex;
 		std::atomic<bool>			m_drawableChange;
 		sf::RenderWindow			*m_window;
+		sf::View					m_view;
 		ObjectManagerBase			*m_objectManager;
-
 		void						drawObject();
 		void						manageKePress(const sf::Event &event);
 };

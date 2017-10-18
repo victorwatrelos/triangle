@@ -28,12 +28,14 @@ class ObjectManager : public ObjectManagerBase
 	private:
 		void	updateVelocity();//TODO optimized by only calling when update
 
-		WindowManagerBase				*m_windowManager;
+		WindowManagerBase			*m_windowManager;
 		std::atomic<bool>			m_running;
 		Entity						m_player;
 		float						m_playerSpeed;
+		float						m_acceleration;
 		float						m_playerRotation;
 		sf::Vertex 					line[2];
 		sf::VertexArray				triangle;
+		sf::VertexArray				triangle2;
 
 };
