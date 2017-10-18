@@ -49,6 +49,10 @@ void	ObjectManager::JoystickMoved()
 
 void	ObjectManager::updateVelocity()//To optimized by only calling when update
 {
+	auto playerPos = m_player.getPosition();
+	triangle[0].position = sf::Vector2f(playerPos.x, playerPos.y + 20.f);
+	triangle[1].position = sf::Vector2f(playerPos.x, playerPos.y - 20.f);
+	triangle[2].position = sf::Vector2f(playerPos.x - std::sin(m_playerRotation) * 300.f, playerPos.y - std::cos(m_playerRotation) * 300.f);
 	float rotation = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 	if (rotation < 10.f && rotation > -10.f)
 		return ;
@@ -60,7 +64,7 @@ void	ObjectManager::updateVelocity()//To optimized by only calling when update
 	m_playerRotation += rotation * 0.01f;
 	while (m_playerRotation > 2 * M_PI)
 		m_playerRotation -= 2 * M_PI;
-	m_player.setRotation(PLAYER_BASE_ROTATION + RAD_TO_DEG(m_playerRotation));
+	m_player.setRotation(PLAYER_BASE_ROTATION + RAD_TO_DEG(-m_playerRotation));
 	std::cout << "Rotation: " << RAD_TO_DEG(m_playerRotation) << std::endl;
 }
 

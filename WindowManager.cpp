@@ -54,6 +54,9 @@ void	WindowManager::Run()
 		{
 			switch (event.type)
 			{
+				case sf::Event::KeyPressed:
+					if (event.key.code != sf::Keyboard::Escape)
+						break;
 				case sf::Event::Closed:
 					m_window->close();
 					continue ;
