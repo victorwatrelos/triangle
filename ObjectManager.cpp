@@ -54,7 +54,7 @@ void	ObjectManager::updateVelocity()//To optimized by only calling when update
 			m_acceleration = 0.f;
 		else
 			//Acceleration
-			m_acceleration = (position + 100.f) * 0.1f;
+			m_acceleration = (position + 100.f) * 0.07f;
 		if (m_acceleration < 0.1f)
 		{
 			m_acceleration = 0.f;
@@ -68,8 +68,8 @@ void	ObjectManager::updateVelocity()//To optimized by only calling when update
 		{
 			m_playerSpeed += m_acceleration;
 		}
-		if (m_playerSpeed > 400.f)
-			m_playerSpeed = 400.f;
+		if (m_playerSpeed > 1000.f)
+			m_playerSpeed = 1000.f;
 		std::cout << "acc: " << m_acceleration << std::endl;
 		std::cout << "player speed: " << m_playerSpeed << std::endl;
 		m_player.SetVelocity({-m_playerSpeed * std::sin(m_playerRotation), -m_playerSpeed * std::cos(m_playerRotation)});
