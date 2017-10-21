@@ -7,6 +7,7 @@ SRC= main.cpp \
 	 WindowManager.cpp \
 	 ObjectManager.cpp \
 	 MathUtils.cpp \
+	 Angle.cpp \
 	 Entity.cpp
 
 .PHONY: clean fclean re all

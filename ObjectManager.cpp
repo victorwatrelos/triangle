@@ -5,11 +5,11 @@ ObjectManager::ObjectManager() :
 	  , m_player("textures/triangle-green-double.png")
 	  , m_playerSpeed({0.f, 0.f})
 	  , m_acceleration(0.f)
-	  , m_playerRotation(0.f)
-	  , m_playerDirection({0.f, 0.f})
+	  , m_playerAngle()
 	  , triangle(sf::PrimitiveType::Triangles, 3)
 	  , triangle2(sf::PrimitiveType::Triangles, 3)
 {
+	m_playerAngle.SetDegAngle(PLAYER_BASE_ROTATION);
 }
 
 void	ObjectManager::Stop()
@@ -73,14 +73,14 @@ void	ObjectManager::updatePlayerSpeed()
 	}
 	else
 	{
-		sf::Vector2f	currentAcc = {std::sin(m_playerRotation) * -m_acceleration, std::cos(m_playerRotation) * -m_acceleration};
+		sf::Vector2f	currentAcc = {m_playerAngle.GetDirection().x * -m_acceleration, m_playerAngle.GetDirection().y * -m_acceleration};
 		m_playerSpeed = m_playerSpeed + currentAcc;
 	}
 
 	//Update magnitude with new speed
 	mag = math::magnitude(m_playerSpeed);
 
-	if (mag > 1000.f)
+	if (mag > 500.f)
 	{
 		m_playerSpeed = math::normalize(m_playerSpeed, mag) * 1000.f;
 	}
@@ -97,14 +97,9 @@ void	ObjectManager::updatePlayerRotation()
 	else
 		rotation -= 10.f;
 	rotation *= 0.1f;
-	m_playerRotation += rotation * 0.01f;
-	while (m_playerRotation > 2 * M_PI)
-		m_playerRotation -= 2 * M_PI;
-	assert(m_playerRotation == m_playerRotation && "m_playerRotation is NaN");
-	float	degTotRotation = RAD_TO_DEG(-m_playerRotation);
-	m_player.setRotation(PLAYER_BASE_ROTATION + degTotRotation);
-	m_playerDirection = {std::sin(m_playerRotation), std::cos(m_playerRotation)};
-	m_windowManager->SetViewRotation(degTotRotation);
+	m_playerAngle += rotation * 0.01f;
+	m_player.setRotation(m_playerAngle.GetDegAngle());
+	m_windowManager->SetViewRotation(m_playerAngle.GetDegAngle());
 }
 
 void	ObjectManager::updateVelocity()//To optimized by only calling when update

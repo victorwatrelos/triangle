@@ -99,7 +99,7 @@ void	WindowManager::Run()
 		std::stringstream	ss;
 		ss << "FPS: " << fps << " (" << time.asMilliseconds() << " ms)" << " Loop: " << nbLoop;
 		m_fps.setString(ss.str());
-		if (nbLoop % 60 == 0)
+		if (nbLoop % 20 == 0)
 			m_playerInfo.setString(m_objectManager->GetPlayerInfo());
 		m_objectManager->Loop(time);
 		this->m_window->clear();

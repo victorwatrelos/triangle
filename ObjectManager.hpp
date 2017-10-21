@@ -4,6 +4,7 @@
 #include "ObjectManagerBase.hpp"
 #include "WindowManagerBase.hpp"
 #include "Types.hpp"
+#include "Angle.hpp"
 #include "MathUtils.hpp"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/PrimitiveType.hpp>
@@ -42,8 +43,7 @@ class ObjectManager : public ObjectManagerBase
 		Entity						m_player;
 		sf::Vector2f				m_playerSpeed;
 		float						m_acceleration;
-		float						m_playerRotation;
-		sf::Vector2f				m_playerDirection;
+		Angle						m_playerAngle;
 		sf::Vertex 					line[2];
 		sf::VertexArray				triangle;
 		sf::VertexArray				triangle2;
