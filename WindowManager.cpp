@@ -9,6 +9,13 @@ WindowManager::WindowManager(ObjectManagerBase *objectManager)
 	this->m_window->setVerticalSyncEnabled(true);
 	//this->m_window->setFramerateLimit(30);
 	this->m_objectManager->Init(this);
+	if (!this->m_font.loadFromFile("ressources/fonts/absender1.ttf"))
+	{
+		std::cerr << "Unable to load font" << std::endl;
+		assert(false);
+	}
+	m_fps.setFont(m_font);
+	this->AddObject(&m_fps, true);
 }
 
 WindowManager::~WindowManager(void) {
@@ -82,6 +89,10 @@ void	WindowManager::Run()
 
 		}
 		time = clock.restart();
+		fps = 1.f / time.asSeconds();
+		std::stringstream	ss;
+		ss << "FPS: " << fps << " (" << time.asMilliseconds() << " ms)" << " Loop: " << nbLoop;
+		m_fps.setString(ss.str());
 		m_objectManager->Loop(time);
 		this->m_window->clear();
 		this->drawObject();

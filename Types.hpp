@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cassert>
+
 using U64 = uint64_t;
 using I64 = int64_t;
 

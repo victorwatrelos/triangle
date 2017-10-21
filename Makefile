@@ -6,6 +6,7 @@ NAME_BIN= triangle
 SRC= main.cpp \
 	 WindowManager.cpp \
 	 ObjectManager.cpp \
+	 MathUtils.cpp \
 	 Entity.cpp
 
 .PHONY: clean fclean re all

@@ -12,6 +12,8 @@
 #include <mutex>
 #include <thread>
 #include <chrono>
+#include <sstream>
+#include <string>
 
 class WindowManager : public WindowManagerBase
 {
@@ -41,6 +43,9 @@ class WindowManager : public WindowManagerBase
 		sf::RenderWindow			*m_window;
 		sf::View					m_view;
 		ObjectManagerBase			*m_objectManager;
+		sf::Font					m_font;
+		sf::Text					m_fps;
+
 		void						drawObject();
 		void						manageKePress(const sf::Event &event);
 };
