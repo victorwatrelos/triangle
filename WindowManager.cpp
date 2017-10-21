@@ -15,7 +15,10 @@ WindowManager::WindowManager(ObjectManagerBase *objectManager)
 		assert(false);
 	}
 	m_fps.setFont(m_font);
-	this->AddObject(&m_fps, true);
+	m_fps.setScale({0.5f, 0.5f});
+	m_playerInfo.setScale({0.5f, 0.5f});
+	m_playerInfo.setFont(m_font);
+	m_playerInfo.setPosition({0.f, 30.f});
 }
 
 WindowManager::~WindowManager(void) {
@@ -47,6 +50,9 @@ void	WindowManager::drawObject()
 		if (drawable.visible)
 			m_window->draw(*drawable.drawable);
 	}
+	m_window->setView(m_hudView);
+	m_window->draw(m_fps);
+	m_window->draw(m_playerInfo);
 }
 
 void	WindowManager::SetViewCenter(sf::Vector2f center)
@@ -93,6 +99,8 @@ void	WindowManager::Run()
 		std::stringstream	ss;
 		ss << "FPS: " << fps << " (" << time.asMilliseconds() << " ms)" << " Loop: " << nbLoop;
 		m_fps.setString(ss.str());
+		if (nbLoop % 60 == 0)
+			m_playerInfo.setString(m_objectManager->GetPlayerInfo());
 		m_objectManager->Loop(time);
 		this->m_window->clear();
 		this->drawObject();

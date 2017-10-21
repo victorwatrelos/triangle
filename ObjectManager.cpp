@@ -4,7 +4,9 @@ ObjectManager::ObjectManager() :
 	  m_running(false)
 	  , m_player("textures/triangle-green-double.png")
 	  , m_playerSpeed({0.f, 0.f})
+	  , m_acceleration(0.f)
 	  , m_playerRotation(0.f)
+	  , m_playerDirection({0.f, 0.f})
 	  , triangle(sf::PrimitiveType::Triangles, 3)
 	  , triangle2(sf::PrimitiveType::Triangles, 3)
 {
@@ -118,6 +120,13 @@ void	ObjectManager::Loop(const sf::Time &time)
 	updateVelocity();
 	m_player.Move(time);
 	m_windowManager->SetViewCenter(m_player.GetPosition());
+}
+
+std::string	ObjectManager::GetPlayerInfo() const
+{
+	std::stringstream	ss;
+	ss << "COORD: " << std::setprecision(2) << m_player.GetPosition().x << "; " << m_player.GetPosition().y << " VEL: " << m_playerSpeed.x << "; " << m_playerSpeed.y << " Acc: " << m_acceleration;
+	return ss.str();
 }
 
 ObjectManager::~ObjectManager(void) {

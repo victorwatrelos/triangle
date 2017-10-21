@@ -9,6 +9,8 @@
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <cmath>
 #include <mutex>
+#include <sstream>
+#include <iomanip>
 
 #define PLAYER_BASE_ROTATION -30.f
 #define EPSILON 0.1f
@@ -28,6 +30,7 @@ class ObjectManager : public ObjectManagerBase
 		void	Init(WindowManagerBase *window) override;
 		void	JoystickMoved() override;
 		void	Stop();
+		std::string	GetPlayerInfo() const override;
 	private:
 		void	updateVelocity();//TODO optimized by only calling when update
 		void	updateAccFromJoystickPos();
